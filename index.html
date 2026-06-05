@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lời Mời Lễ Tốt Nghiệp</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
@@ -13,76 +15,83 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-        <section class="min-h-screen relative flex items-center justify-center text-white px-4">
-                <div class="absolute inset-0 z-0">
-                        <img src="DSC00486.JPG" alt="Background Blurred" class="w-full h-full object-cover blur-2xl opacity-50 scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-blue-900/80 to-blue-950/90"></div>
+    <!-- HERO SECTION (NỀN ẢNH FULL SCREEN) -->
+    <section class="min-h-screen relative flex flex-col justify-center items-center text-center text-white px-4 overflow-hidden">
+        
+        <!-- 1. BỨC ẢNH NỀN DSC00486.JPG -->
+        <div class="absolute inset-0 z-0">
+            <img src="DSC00486.JPG" alt="Background" class="w-full h-full object-cover">
+            <!-- Lớp phủ đen mờ giúp chữ luôn nổi bật và rõ nét, không bị lóa -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
         </div>
 
-                <div class="absolute w-96 h-96 bg-blue-500/5 rounded-full -top-20 -left-20 blur-2xl z-0"></div>
-        <div class="absolute w-96 h-96 bg-indigo-500/5 rounded-full -bottom-20 -right-20 blur-2xl z-0"></div>
-
-                <div class="z-10 w-full max-w-xl mx-auto backdrop-blur-lg bg-black/10 p-8 sm:p-12 rounded-3xl border border-white/10 shadow-[0_0_60px_-15px_rgba(30,58,138,0.5)]">
+        <!-- KHỐI NỘI DUNG CHÍNH NẰM TRÊN NỀN ẢNH -->
+        <div class="z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center space-y-8">
             
-                        <div class="text-center mb-10">
+            <!-- DÒNG CHỮ CĂN GIỮA TRÊN CÙNG -->
+            <div>
                 <p class="text-amber-400 font-semibold tracking-widest uppercase mb-2 text-xs sm:text-sm">Save The Date</p>
-                <h1 class="font-serif italic text-5xl sm:text-7xl text-amber-200 leading-tight">Lễ Tốt Nghiệp</h1>
+                <h1 class="font-serif italic text-4xl sm:text-6xl text-amber-200 leading-tight">Thư mời lễ tốt nghiệp</h1>
             </div>
             
-                        <div class="text-center mb-10">
-                                <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full border-4 border-amber-300/30 overflow-hidden shadow-xl mb-6 ring-4 ring-white/5">
-                    <img src="DSC00486.JPG" alt="Avatar Đỗ Thị Trang" class="w-full h-full object-cover">
-                </div>
-
+            <!-- KHỐI THÔNG TIN MỜI (GIỮ NGUYÊN ĐỊNH DẠNG CŨ CỦA BẠN) -->
+            <div class="max-w-xl">
                 <p class="text-lg sm:text-xl font-light text-slate-200 mb-2">Trân trọng kính mời Bạn đến chung vui cùng</p>
                 <h2 class="text-3xl sm:text-4xl font-bold text-amber-300 uppercase tracking-widest leading-snug">ĐỖ THỊ TRANG</h2>
             </div>
             
-                        <div class="grid grid-cols-4 gap-2 sm:gap-3 max-w-sm mx-auto text-center bg-white/5 backdrop-blur-sm p-3 rounded-2xl border border-white/10 shadow-inner">
-                <div>
-                    <span id="days" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
-                    <span class="text-[10px] text-slate-300 uppercase tracking-wider">Ngày</span>
-                </div>
-                <div>
-                    <span id="hours" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
-                    <span class="text-[10px] text-slate-300 uppercase tracking-wider">Giờ</span>
-                </div>
-                <div>
-                    <span id="minutes" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
-                    <span class="text-[10px] text-slate-300 uppercase tracking-wider">Phút</span>
-                </div>
-                <div>
-                    <span id="seconds" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
-                    <span class="text-[10px] text-slate-300 uppercase tracking-wider">Giây</span>
+            <!-- BÊN DƯỚI LÀ DÒNG THỜI GIAN ĐẾM NGƯỢC -->
+            <div class="w-full max-w-md bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                <div class="grid grid-cols-4 gap-2 sm:gap-4">
+                    <div>
+                        <span id="days" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
+                        <span class="text-xs text-slate-300 uppercase tracking-wider">Ngày</span>
+                    </div>
+                    <div>
+                        <span id="hours" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
+                        <span class="text-xs text-slate-300 uppercase tracking-wider">Giờ</span>
+                    </div>
+                    <div>
+                        <span id="minutes" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
+                        <span class="text-xs text-slate-300 uppercase tracking-wider">Phút</span>
+                    </div>
+                    <div>
+                        <span id="seconds" class="block text-2xl sm:text-3xl font-bold text-amber-300">00</span>
+                        <span class="text-xs text-slate-300 uppercase tracking-wider">Giây</span>
+                    </div>
                 </div>
             </div>
         </div>
         
-                <div class="absolute bottom-6 animate-bounce z-10">
+        <!-- Mũi tên cuộn xuống -->
+        <div class="absolute bottom-6 animate-bounce z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-300/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
         </div>
     </section>
 
-        <section class="py-16 px-4 max-w-5xl mx-auto">
+    <!-- THÔNG TIN CHI TIẾT -->
+    <section class="py-16 px-4 max-w-5xl mx-auto">
         <div class="text-center mb-12">
             <h3 class="font-serif text-4xl text-blue-950 mb-3 leading-tight">Thông Tin Buổi Lễ</h3>
             <div class="w-20 h-1 bg-amber-400 mx-auto rounded"></div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 items-stretch">
-                        <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center flex flex-col justify-center transform transition hover:shadow-2xl">
+            <!-- Thời gian -->
+            <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center flex flex-col justify-center transform transition hover:shadow-2xl">
                 <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 </div>
                 <h4 class="text-2xl font-semibold text-blue-950 mb-3">Thời Gian</h4>
                 <p class="text-lg font-medium text-slate-700">08:00 - 11:00 </p>
-                <p class="text-3xl font-bold text-blue-900 my-2leading-tight">Thứ Bảy, 20/06/2026</p>
+                <p class="text-3xl font-bold text-blue-900 my-2 leading-tight">Thứ Bảy, 20/06/2026</p>
                 <p class="text-sm text-slate-500 mt-2">(Tức ngày xx/xx Âm lịch)</p>
             </div>
 
-                        <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center flex flex-col justify-between transform transition hover:shadow-2xl">
+            <!-- Địa điểm -->
+            <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center flex flex-col justify-between transform transition hover:shadow-2xl">
                 <div>
                     <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -92,14 +101,16 @@
                     <p class="text-slate-600">Trường Đại học Tài chính - Ngân hàng Hà Nội</p>
                     <p class="text-sm text-slate-500 mt-2">Mê Linh, Hà Nội</p>
                 </div>
-                                <a href="https://maps.app.goo.gl/UGhe6RWqmWQ3fhHz7" target="_blank" class="mt-6 inline-block bg-blue-950 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-2xl text-sm transition shadow-md hover:shadow-lg">
+                <!-- Button chỉ đường -->
+                <a href="https://maps.app.goo.gl/UGhe6RWqmWQ3fhHz7" target="_blank" class="mt-6 inline-block bg-blue-950 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-2xl text-sm transition shadow-md hover:shadow-lg">
                     Xem bản đồ
                 </a>
             </div>
         </div>
     </section>
 
-        <section class="bg-slate-100 py-20 px-4">
+    <!-- FORM XÁC NHẬN THAM DỰ -->
+    <section class="bg-slate-100 py-20 px-4">
         <div class="max-w-xl mx-auto bg-white p-10 sm:p-12 rounded-3xl shadow-xl">
             <h3 class="font-serif text-3xl text-center text-blue-950 mb-3 leading-tight">Xác Nhận Tham Dự</h3>
             <p class="text-center text-slate-600 text-sm mb-10">Phản hồi của bạn giúp Trang chuẩn bị đón tiếp chu đáo hơn nhé!</p>
@@ -128,13 +139,14 @@
         </div>
     </section>
 
-        <footer class="bg-blue-950 text-slate-400 text-center py-8 text-sm">
+    <!-- FOOTER -->
+    <footer class="bg-blue-950 text-slate-400 text-center py-8 text-sm">
         <p>Rất hân hạnh được đón tiếp!</p>
         <p class="text-xs text-slate-500 mt-1">© 2026 Đỗ Thị Trang. Powered by Đam Mê.</p>
     </footer>
 
-        <script>
-        // Đặt ngày tốt nghiệp của bạn ở đây (Định dạng: YYYY-MM-DD THH:MM:SS)
+    <!-- JAVASCRIPT COUNTDOWN -->
+    <script>
         const graduationDate = new Date("2026-06-20T08:00:00").getTime();
 
         const countdown = setInterval(function() {
@@ -160,7 +172,6 @@
             }
         }, 1000);
 
-        // Xử lý Form đơn giản
         document.getElementById('attendanceForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Cảm ơn bạn đã phản hồi nha! 🎉');
