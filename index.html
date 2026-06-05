@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lời Mời Lễ Tốt Nghiệp</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Nhúng Montserrat (cơ bản), Playfair Display (Tiêu đề sắc sảo) và Alex Brush (Tên riêng mềm mại) -->
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@1,500;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; }
         
@@ -25,29 +23,22 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- HERO SECTION (NỀN ẢNH FULL SCREEN) -->
     <section class="min-h-screen relative flex items-end justify-center text-center text-white px-4 pb-16 overflow-hidden">
         
-        <!-- 1. BỨC ẢNH NỀN DSC00486.JPG -->
         <div class="absolute inset-0 z-0">
             <img src="DSC00486.JPG" alt="Background" class="w-full h-full object-cover">
-            <!-- Lớp phủ tối mờ tinh tế giúp chữ luôn hiển thị rõ nét và nổi bật trên ảnh -->
             <div class="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]"></div>
         </div>
 
-        <!-- KHỐI NỘI DUNG CHÍNH (ĐÃ ĐƯỢC HẠ THẤP) -->
         <div class="z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center space-y-6">
             
-            <!-- TIÊU ĐỀ: 1 DÒNG DUY NHẤT, FONT PLAYFAIR DISPLAY SẮC SẢO, HIỆN ĐẠI -->
             <div class="mb-2 w-full overflow-hidden">
-                <p class="text-amber-400 font-semibold tracking-widest uppercase mb-1 text-xs sm:text-sm">Save The Date</p>
-                <!-- whitespace-nowrap giữ chữ trên 1 dòng, italic tạo nét nghiêng thanh lịch -->
-                <h1 class="font-title-modern text-4xl sm:text-5xl lg:text-5xl text-amber-200 italic font-medium whitespace-nowrap tracking-wide">
+                <p class="text-amber-400 font-semibold tracking-widest uppercase mb-2 text-xs sm:text-sm">Save The Date</p>
+                <h1 class="font-title-modern text-3xl sm:text-4xl lg:text-5xl text-amber-200 font-medium whitespace-nowrap tracking-widest uppercase">
                     Thư mời lễ tốt nghiệp
                 </h1>
             </div>
             
-            <!-- THÔNG TIN MỜI & TÊN CỬ NHÂN: GIỮ FONT ALEX BRUSH MỀM MẠI -->
             <div class="max-w-xl">
                 <p class="text-base sm:text-lg font-light italic text-slate-300 mb-2">Trân trọng kính mời Bạn đến chung vui cùng</p>
                 <h2 class="font-name-wedding text-5xl sm:text-6xl text-amber-300 leading-snug drop-shadow-md">
@@ -55,7 +46,6 @@
                 </h2>
             </div>
             
-            <!-- BÊN DƯỚI LÀ DÒNG THỜI GIAN ĐẾM NGƯỢC -->
             <div class="w-full max-w-md bg-black/25 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-xl">
                 <div class="grid grid-cols-4 gap-2 sm:gap-4">
                     <div>
@@ -78,7 +68,6 @@
             </div>
         </div>
         
-        <!-- Mũi tên cuộn xuống nhỏ gọn -->
         <div class="absolute bottom-2 animate-bounce z-10 opacity-60">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -86,9 +75,7 @@
         </div>
     </section>
 
-    <!-- THÔNG TIN CHI TIẾT BUỔI LỄ (NỀN ẢNH DSC00099.JPG) -->
     <section class="relative py-24 px-4 overflow-hidden bg-cover bg-center" style="background-image: url('DSC00099.JPG');">
-        <!-- Lớp phủ tối đè lên ảnh DSC00099 để phần nội dung bên trong hiển thị rõ ràng -->
         <div class="absolute inset-0 bg-black/60 backdrop-blur-[1px] z-0"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto">
@@ -98,7 +85,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 items-stretch">
-                <!-- Khối Thời gian -->
                 <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/10 text-center flex flex-col justify-center transform transition hover:shadow-2xl">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -109,7 +95,6 @@
                     <p class="text-slate-600">Hãy đến sớm để cùng Trang chuẩn bị và chụp những bức ảnh kỷ niệm đẹp nhất nhé!</p>
                 </div>
 
-                <!-- Khối Địa điểm -->
                 <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/10 text-center flex flex-col justify-between transform transition hover:shadow-2xl">
                     <div>
                         <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -120,8 +105,7 @@
                         <p class="text-slate-600"> cơ sở 1: Mê Linh, Hà Nội</p>
                         <p class="text-sm text-slate-500 mt-2">........</p>
                     </div>
-                    <!-- Button chỉ đường Google Maps -->
-                    <a href="https://maps.app.goo.gl/UGhe6RWqmWQ3fhHz7" target="_blank" class="mt-6 inline-block bg-blue-950 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-2xl text-sm transition shadow-md hover:shadow-lg">
+                    <a href="https://maps.google.com" target="_blank" class="mt-6 inline-block bg-blue-950 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-2xl text-sm transition shadow-md hover:shadow-lg">
                         Xem bản đồ
                     </a>
                 </div>
@@ -129,9 +113,7 @@
         </div>
     </section>
 
-    <!-- FORM XÁC NHẬN THAM DỰ (ĐÃ THAY NỀN ẢNH DSC01027.JPG) -->
     <section class="relative py-24 px-4 bg-cover bg-center overflow-hidden" style="background-image: url('DSC01027.JPG');">
-        <!-- Lớp phủ tối kết hợp mờ hậu cảnh để form ở giữa hiển thị rõ nét nhất -->
         <div class="absolute inset-0 bg-black/55 backdrop-blur-[1.5px] z-0"></div>
 
         <div class="relative z-10 max-w-xl mx-auto bg-white p-10 sm:p-12 rounded-3xl shadow-2xl">
@@ -141,36 +123,34 @@
             <form id="attendanceForm" class="space-y-5">
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Tên của bạn *</label>
-                    <input type="text" required class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition">
+                    <input type="text" id="formName" name="name" required class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Bạn có đến chung zui không? *</label>
-                    <select class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition appearance-none bg-white">
-                        <option value="yes">Chắc chắn đến chứ!</option>
-                        <option value="maybe">Mình xem lại lịch rồi báo sau nha</option>
-                        <option value="no">Tiếc quá, mình không đến được</option>
+                    <select id="formAttendance" name="attendance" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition appearance-none bg-white">
+                        <option value="Chắc chắn đến chứ!">Chắc chắn đến chứ!</option>
+                        <option value="Mình xem lại lịch rồi báo sau nha">Mình xem lại lịch rồi báo sau nha</option>
+                        <option value="Tiếc quá, mình không đến được">Tiếc quá, mình không đến được</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Lời chúc gửi đến Tân cử nhân</label>
-                    <textarea rows="4" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition" placeholder="Viết gì đó yêu thương..."></textarea>
+                    <textarea id="formMessage" name="message" rows="4" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition" placeholder="Viết gì đó yêu thương..."></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-950 hover:bg-blue-900 text-white font-semibold py-4 rounded-2xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                    Gửi Xác Nhận
+                <button type="submit" id="submitBtn" class="w-full bg-blue-950 hover:bg-blue-900 text-white font-semibold py-4 rounded-2xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center">
+                    <span id="btnText">Gửi Xác Nhận</span>
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="bg-blue-950 text-slate-400 text-center py-8 text-sm">
         <p>Rất hân hạnh được đón tiếp!</p>
         <p class="text-xs text-slate-500 mt-1">© 2026 Đỗ Thị Trang. Powered by Đam Mê.</p>
     </footer>
 
-    <!-- JAVASCRIPT COUNTDOWN -->
     <script>
-        // Cấu hình ngày giờ đếm ngược
+        // 1. Cấu hình ngày giờ đếm ngược
         const graduationDate = new Date("2026-06-20T08:00:00").getTime();
 
         const countdown = setInterval(function() {
@@ -196,10 +176,45 @@
             }
         }, 1000);
 
-        // Xử lý sự kiện Submit Form tham dự
+        // 2. Xử lý sự kiện gửi Form về Google Sheets
         document.getElementById('attendanceForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Cảm ơn bạn đã phản hồi nha! 🎉');
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            
+            submitBtn.disabled = true;
+            btnText.innerText = "Đang gửi phản hồi...";
+            
+            const formData = {
+                name: document.getElementById('formName').value,
+                attendance: document.getElementById('formAttendance').value,
+                message: document.getElementById('formMessage').value
+            };
+            
+            // DÁN ĐƯỜNG LINK WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxnz8CyCNGHBpTHCqfCUaTY95q_c3xsNe5Brb4oUwVk7_Hq2aybIXSVzGJB4yaR7SKu/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                alert('Cảm ơn bạn đã phản hồi nha! 🎉');
+                document.getElementById('attendanceForm').reset();
+            })
+            .catch(error => {
+                console.error('Lỗi!', error.message);
+                alert('Có lỗi xảy ra, bạn vui lòng thử lại nhé!');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                btnText.innerText = "Gửi Xác Nhận";
+            });
         });
     </script>
 </body>
