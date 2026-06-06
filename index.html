@@ -6,6 +6,8 @@
     <title>Lời Mời Lễ Tốt Nghiệp</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tích hợp thư viện SweetAlert2 để hiển thị popup thông báo kèm hình ảnh meme mượt mà -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { font-family: 'Montserrat', sans-serif; }
         
@@ -123,12 +125,10 @@
             <form id="attendanceForm" class="space-y-5">
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Tên của bạn *</label>
-                    <!-- Đồng bộ thuộc tính name="name" cho cột Tên -->
                     <input type="text" id="formName" name="name" required class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Bạn có đến chung zui không? *</label>
-                    <!-- Đồng bộ thuộc tính name="status" cho cột Trạng thái -->
                     <select id="formAttendance" name="status" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition appearance-none bg-white">
                         <option value="Chắc chắn đến chứ!">Chắc chắn đến chứ!</option>
                         <option value="Mình xem lại lịch rồi báo sau nha">Mình xem lại lịch rồi báo sau nha</option>
@@ -137,8 +137,11 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Lời chúc gửi đến Tân cử nhân</label>
-                    <!-- Đồng bộ thuộc tính name="wishes" cho cột Lời chúc -->
-                    <textarea id="formMessage" name="wishes" rows="4" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition" placeholder="Viết gì đó iu thưn đi kkk..."></textarea>
+                    <!-- Cấu hình tự co giãn chiều cao (oninput) và bẻ đôi chuỗi chữ dính liền (break-all whitespace-pre-wrap) -->
+                    <textarea id="formMessage" name="wishes" rows="4" 
+                              oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
+                              class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition resize-none overflow-hidden break-all whitespace-pre-wrap" 
+                              placeholder="Viết gì đó iu thưn đi kkk..."></textarea>
                 </div>
                 <button type="submit" id="submitBtn" class="w-full bg-blue-950 hover:bg-blue-900 text-white font-semibold py-4 rounded-2xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center">
                     <span id="btnText">Gửi Xác Nhận</span>
@@ -149,7 +152,6 @@
 
     <footer class="bg-blue-950 text-slate-400 text-center py-8 text-sm">
         <p>Rất mong được gặp tềnh iu !!!</p>
-    
     </footer>
 
     <script>
@@ -179,7 +181,7 @@
             }
         }, 1000);
 
-        // 2. Xử lý sự kiện gửi Form về Google Sheets dưới dạng URL-encoded (Chuẩn cấu hình Apps Script)
+        // 2. Xử lý sự kiện gửi Form về Google Sheets và hiển thị thông báo Meme tương ứng
         document.getElementById('attendanceForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -187,33 +189,75 @@
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             
-            submitBtn.disabled = true;
-            btnText.innerText = "Đang gửi phản hồi...";
+            // Bật hiệu ứng chờ gửi dữ liệu bằng SweetAlert2
+            Swal.fire({
+                title: 'Đang gửi phản hồi...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzUceXFJBygJLLm6UMfNYLrk4j5sHupeu0qvrlwZ3myNezJskANvkggHQ-7tE2FjcBM/exec';
             
-            // Sử dụng URLSearchParams thay vì JSON string giúp e.parameter của Apps Script nhận được dữ liệu chuẩn xác
+            // Lấy trạng thái được chọn để xử lý thông báo tùy biến sau khi fetch thành công
+            const statusSelected = document.getElementById('formAttendance').value;
             const urlEncodedData = new URLSearchParams(new FormData(form)).toString();
             
             fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors', // Giữ nguyên no-cors để tránh lỗi chính sách CORS trên trang tĩnh
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: urlEncodedData
             })
             .then(() => {
-                alert('Cảm ơn tềnh iu đã phản hồi nha! 🎉');
+                // Khởi tạo các biến nội dung thông báo
+                let alertTitle = 'Cảm ơn tềnh iu!';
+                let alertText = 'Phản hồi của bạn đã được ghi lại thành công.';
+                let alertImage = '';
+
+                // Phân loại kiểm tra điều kiện dựa theo lựa chọn trạng thái
+                if (statusSelected === "Chắc chắn đến chứ!") {
+                    alertTitle = 'đến thì alo mình nah!!!';
+                    alertText = 'Nhớ đến chung vui đúng giờ với Trang nha 🥰';
+                    alertImage = 'mèo cười đểu.png';
+                } else if (statusSelected === "Tiếc quá, mình không đến được") {
+                    alertTitle = 'BUỒN SÂU SẮC';
+                    alertText = 'Huhu tiếc quá, hẹn tềnh iu vào dịp khác nha 😢';
+                    alertImage = 'mèo khóc.jpg';
+                } else if (statusSelected === "Mình xem lại lịch rồi báo sau nha") {
+                    alertTitle = 'Tôi chờ tin bạn';
+                    alertText = 'Nhớ chốt lịch sớm rồi báo lại cho mình biết nha 😉';
+                    alertImage = 'mèo tin.png';
+                }
+
+                // Hiển thị hộp thoại kết quả cực xịn kèm meme mèo tương ứng
+                Swal.fire({
+                    title: alertTitle,
+                    text: alertText,
+                    imageUrl: alertImage,
+                    imageWidth: 180,
+                    imageHeight: 180,
+                    imageAlt: 'Meme mèo phản hồi',
+                    confirmButtonText: 'Đóng lại',
+                    confirmButtonColor: '#1e3a8a'
+                });
+
                 form.reset();
+                // Khôi phục lại chiều cao ban đầu của ô textarea sau khi reset dữ liệu
+                document.getElementById('formMessage').style.height = '';
             })
             .catch(error => {
                 console.error('Lỗi!', error.message);
-                alert('Có lỗi xảy ra, bạn vui lòng thử lại nhé!');
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                btnText.innerText = "Gửi Xác Nhận";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Có lỗi xảy ra!',
+                    text: 'Không thể gửi phản hồi, bạn vui lòng thử lại nhé.',
+                    confirmButtonText: 'Thử lại',
+                    confirmButtonColor: '#1e3a8a'
+                });
             });
         });
     </script>
