@@ -123,11 +123,13 @@
             <form id="attendanceForm" class="space-y-5">
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Tên của bạn *</label>
+                    <!-- Đồng bộ thuộc tính name="name" cho cột Tên -->
                     <input type="text" id="formName" name="name" required class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Bạn có đến chung zui không? *</label>
-                    <select id="formAttendance" name="attendance" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition appearance-none bg-white">
+                    <!-- Đồng bộ thuộc tính name="status" cho cột Trạng thái -->
+                    <select id="formAttendance" name="status" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition appearance-none bg-white">
                         <option value="Chắc chắn đến chứ!">Chắc chắn đến chứ!</option>
                         <option value="Mình xem lại lịch rồi báo sau nha">Mình xem lại lịch rồi báo sau nha</option>
                         <option value="Tiếc quá, mình không đến được">Tiếc quá, mình không đến được</option>
@@ -135,7 +137,8 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Lời chúc gửi đến Tân cử nhân</label>
-                    <textarea id="formMessage" name="message" rows="4" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition" placeholder="Viết gì đó yêu thương..."></textarea>
+                    <!-- Đồng bộ thuộc tính name="wishes" cho cột Lời chúc -->
+                    <textarea id="formMessage" name="wishes" rows="4" class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition" placeholder="Viết gì đó yêu thương..."></textarea>
                 </div>
                 <button type="submit" id="submitBtn" class="w-full bg-blue-950 hover:bg-blue-900 text-white font-semibold py-4 rounded-2xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center">
                     <span id="btnText">Gửi Xác Nhận</span>
@@ -176,36 +179,33 @@
             }
         }, 1000);
 
-        // 2. Xử lý sự kiện gửi Form về Google Sheets
+        // 2. Xử lý sự kiện gửi Form về Google Sheets dưới dạng URL-encoded (Chuẩn cấu hình Apps Script)
         document.getElementById('attendanceForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const form = e.target;
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             
             submitBtn.disabled = true;
             btnText.innerText = "Đang gửi phản hồi...";
             
-            const formData = {
-                name: document.getElementById('formName').value,
-                attendance: document.getElementById('formAttendance').value,
-                message: document.getElementById('formMessage').value
-            };
-            
-            // DÁN ĐƯỜNG LINK WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxnz8CyCNGHBpTHCqfCUaTY95q_c3xsNe5Brb4oUwVk7_Hq2aybIXSVzGJB4yaR7SKu/exec';
+            
+            // Sử dụng URLSearchParams thay vì JSON string giúp e.parameter của Apps Script nhận được dữ liệu chuẩn xác
+            const urlEncodedData = new URLSearchParams(new FormData(form)).toString();
             
             fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'no-cors', // Giữ nguyên no-cors để tránh lỗi chính sách CORS trên trang tĩnh
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify(formData)
+                body: urlEncodedData
             })
             .then(() => {
                 alert('Cảm ơn bạn đã phản hồi nha! 🎉');
-                document.getElementById('attendanceForm').reset();
+                form.reset();
             })
             .catch(error => {
                 console.error('Lỗi!', error.message);
