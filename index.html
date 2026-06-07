@@ -213,37 +213,80 @@
                 body: urlEncodedData
             })
             .then(() => {
-                // Khởi tạo các biến nội dung thông báo an toàn (Tránh lỗi Undefined khiến form bị đứng)
-                let alertTitle = 'Cảm ơn tềnh iu!';
-                let alertText = 'Phản hồi của bạn đã được ghim dô danh sách cụa toi.';
-                let alertImage = '';
+                // Tách biệt hoàn toàn xử lý hiển thị thông báo dựa theo lựa chọn trạng thái
+                if (statusSelected === "Tiếc quá, mình không đến được") {
+                    
+                    // CHUỖI THÔNG BÁO DÀNH RIÊNG CHO TRƯỜNG HỢP KHÔNG ĐẾN ĐƯỢC
+                    Swal.fire({
+                        title: 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.',
+                        text: 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂',
+                        imageUrl: 'mèo khóc.jpg',
+                        imageWidth: 250,
+                        imageHeight: 250,
+                        imageAlt: 'Mèo khóc',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#1e3a8a'
+                    }).then((result) => {
+                        // Khi người dùng bấm OK ở thông báo mèo khóc
+                        if (result.isConfirmed) {
+                            
+                            // 1. Hiện thông báo "mèo lườm.jpg" trong 3 giây rồi tự biến mất
+                            Swal.fire({
+                                title: 'Ủa alo? 👀',
+                                text: 'Tính bùng kèo thiệt hả, xem lại lịch coi có nhầm lẫn gì không đi nha!',
+                                imageUrl: 'mèo lườm.jpg',
+                                imageWidth: 250,
+                                imageHeight: 250,
+                                imageAlt: 'Mèo lườm',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            }).then(() => {
+                                
+                                // 2. Sau 3 giây, tự động chuyển sang thông báo "mèo chụp.jpg" trong 3 giây tiếp theo
+                                Swal.fire({
+                                    title: 'Chốt lịch nha! 📸',
+                                    text: 'Đã chụp màn hình bằng chứng "vắng mặt" gửi cho hội bạn rồi nhé, không chạy đi đâu được!',
+                                    imageUrl: 'mèo chụp.jpg',
+                                    imageWidth: 250,
+                                    imageHeight: 250,
+                                    imageAlt: 'Mèo chụp',
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                });
+                                
+                            });
+                        }
+                    });
 
-                // Phân loại kiểm tra điều kiện dựa theo lựa chọn trạng thái
-                if (statusSelected === "Chắc chắn đến chứ!") {
-                    alertTitle = 'Đến thì alo Trang nhoa!!!';
-                    alertText = 'ko chắc nghe đc máy lun nên hãy gọi cháy máy dùm sốp nha kkk 🥰'; 
-                    alertImage = 'mèo iu.jpg';
-                } else if (statusSelected === "Tiếc quá, mình không đến được") {
-                    alertTitle = 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.';
-                    alertText = 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂';
-                    alertImage = 'mèo khóc.jpg';
-                } else if (statusSelected === "Mình xem lại lịch rồi báo sau nha") {
-                    alertTitle = 'Tôi chờ tin bạn';
-                    alertText = 'Nhớ chốt lịch sớm rồi báo lại cho Troang nhoa 😉';
-                    alertImage = 'mèo tin.png';
+                } else {
+                    // CÁC TRƯỜNG HỢP CÒN LẠI (Chỉ hiện đúng 1 thông báo thông thường, nhấn OK là đóng)
+                    let alertTitle = 'Cảm ơn tềnh iu!';
+                    let alertText = 'Phản hồi của bạn đã được ghim dô danh sách cụa toi.';
+                    let alertImage = '';
+
+                    if (statusSelected === "Chắc chắn đến chứ!") {
+                        alertTitle = 'Đến thì alo Trang nhoa!!!';
+                        alertText = 'ko chắc nghe đc máy lun nên hãy gọi cháy máy dùm sốp nha kkk 🥰'; 
+                        alertImage = 'mèo iu.jpg';
+                    } else if (statusSelected === "Mình xem lại lịch rồi báo sau nha") {
+                        alertTitle = 'Tôi chờ tin bạn';
+                        alertText = 'Nhớ chốt lịch sớm rồi báo lại cho Troang nhoa 😉';
+                        alertImage = 'mèo tin.png';
+                    }
+
+                    Swal.fire({
+                        title: alertTitle,
+                        text: alertText,
+                        imageUrl: alertImage,
+                        imageWidth: 250,
+                        imageHeight: 250,
+                        imageAlt: 'Meme mèo phản hồi',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#1e3a8a'
+                    });
                 }
-
-                // Hiển thị hộp thoại kết quả cực xịn kèm meme mèo tương ứng
-                Swal.fire({
-                    title: alertTitle,
-                    text: alertText,
-                    imageUrl: alertImage,
-                    imageWidth: 250,
-                    imageHeight: 250,
-                    imageAlt: 'Meme mèo phản hồi',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#1e3a8a'
-                });
 
                 form.reset();
                 // Khôi phục lại chiều cao ban đầu của ô textarea sau khi reset dữ liệu
