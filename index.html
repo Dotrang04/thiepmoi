@@ -6,7 +6,6 @@
     <title>Lời Mời Lễ Tốt Nghiệp</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tích hợp thư viện SweetAlert2 để hiển thị popup thông báo kèm hình ảnh meme mượt mà -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { font-family: 'Montserrat', sans-serif; }
@@ -137,7 +136,6 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-800 mb-2">Lời chúc gửi đến Tân cử nhân</label>
-                    <!-- Cấu hình tự co giãn chiều cao (oninput) và bẻ đôi chuỗi chữ dính liền (break-all whitespace-pre-wrap) -->
                     <textarea id="formMessage" name="wishes" rows="4" 
                               oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
                               class="w-full px-5 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition resize-none overflow-hidden break-all whitespace-pre-wrap" 
@@ -189,6 +187,9 @@
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             
+            submitBtn.disabled = true;
+            btnText.innerText = "Đang gửi phản hồi...";
+
             // Bật hiệu ứng chờ gửi dữ liệu bằng SweetAlert2
             Swal.fire({
                 title: 'Đang gửi phản hồi...',
@@ -200,7 +201,6 @@
             
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzUceXFJBygJLLm6UMfNYLrk4j5sHupeu0qvrlwZ3myNezJskANvkggHQ-7tE2FjcBM/exec';
             
-            // Lấy trạng thái được chọn để xử lý thông báo tùy biến sau khi fetch thành công
             const statusSelected = document.getElementById('formAttendance').value;
             const urlEncodedData = new URLSearchParams(new FormData(form)).toString();
             
@@ -213,18 +213,19 @@
                 body: urlEncodedData
             })
             .then(() => {
-                // Khởi tạo các biến nội dung thông báo
+                // Khởi tạo các biến nội dung thông báo an toàn (Tránh lỗi Undefined khiến form bị đứng)
                 let alertTitle = 'Cảm ơn tềnh iu!';
-               // let alertText = 'Phản hồi của bạn đã được ghi lại thành công.';
+                let alertText = 'Phản hồi của bạn đã được ghi lại thành công.';
                 let alertImage = '';
 
                 // Phân loại kiểm tra điều kiện dựa theo lựa chọn trạng thái
                 if (statusSelected === "Chắc chắn đến chứ!") {
                     alertTitle = 'Đến thì alo Trang nhoa!!!';
+                    alertText = 'Nhớ đến đúng giờ chung vui với mình nhé 🥰'; // Đã sửa: Bổ sung text để không bị lỗi treo hàm
                     alertImage = 'mèo iu.jpg';
                 } else if (statusSelected === "Tiếc quá, mình không đến được") {
                     alertTitle = 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.';
-                    alertText = 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu nhoé.😂';
+                    alertText = 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂';
                     alertImage = 'mèo khóc.jpg';
                 } else if (statusSelected === "Mình xem lại lịch rồi báo sau nha") {
                     alertTitle = 'Tôi chờ tin bạn';
@@ -257,6 +258,10 @@
                     confirmButtonText: 'Thử lại',
                     confirmButtonColor: '#1e3a8a'
                 });
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                btnText.innerText = "Gửi Xác Nhận";
             });
         });
     </script>
