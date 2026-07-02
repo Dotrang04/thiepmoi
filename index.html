@@ -102,8 +102,8 @@
                             <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
                         <h4 class="text-2xl font-semibold text-blue-950 mb-3">Địa Điểm</h4>
-                        <p class="text-xl font-bold text-slate-800 leading-tight">Trường Đại học Sư Phạm kỹ thuật Hưng Yên</p>
-                        <p class="text-slate-600"> cơ sở chính: Yên Lịch, Việt Tiến, Hưng Yên</p>
+                        <p class="text-xl font-bold text-slate-800 leading-tight">Trường Đại học Sư phạm Kỹ thuật Hưng Yên</p>
+                        <p class="text-slate-600"> Cơ sở chính: Yên Lịch, Dân Tiến, Khoái Châu, Hưng Yên</p>
                         <p class="text-sm text-slate-500 mt-2">"Check map ngay đi, đừng để ban tổ chức phải phát loa tìm trẻ lạc!😗 "</p>
                     </div>
                     <a href="https://maps.app.goo.gl/sbiQxs3gM9vJpYoS8" target="_blank" class="mt-6 inline-block bg-blue-950 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-2xl text-sm transition shadow-md hover:shadow-lg">
@@ -153,8 +153,8 @@
     </footer>
 
     <script>
-        // 1. Cấu hình ngày giờ đếm ngược
-        const graduationDate = new Date("2026-06-20T08:00:00").getTime();
+        // 1. ĐÃ SỬA: Đồng bộ ngày đếm ngược chính xác với nội dung (24/07/2026)
+        const graduationDate = new Date("2026-07-24T08:30:00").getTime();
 
         const countdown = setInterval(function() {
             const now = new Date().getTime();
@@ -179,8 +179,8 @@
             }
         }, 1000);
 
-        // 2. Xử lý sự kiện gửi Form về Google Sheets và hiển thị thông báo Meme tương ứng
-        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+        // 2. ĐÃ SỬA: Xử lý chuỗi thông báo không bị ghi đè chéo nhau bằng Async/Await
+        document.getElementById('attendanceForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const form = e.target;
@@ -190,7 +190,6 @@
             submitBtn.disabled = true;
             btnText.innerText = "Đang gửi phản hồi...";
 
-            // Bật hiệu ứng chờ gửi dữ liệu bằng SweetAlert2
             Swal.fire({
                 title: 'Đang gửi phản hồi...',
                 allowOutsideClick: false,
@@ -200,24 +199,24 @@
             });
             
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzUceXFJBygJLLm6UMfNYLrk4j5sHupeu0qvrlwZ3myNezJskANvkggHQ-7tE2FjcBM/exec';
-            
             const statusSelected = document.getElementById('formAttendance').value;
             const urlEncodedData = new URLSearchParams(new FormData(form)).toString();
             
-            fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: urlEncodedData
-            })
-            .then(() => {
-                // Tách biệt hoàn toàn xử lý hiển thị thông báo dựa theo lựa chọn trạng thái
+            try {
+                await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: urlEncodedData
+                });
+
+                // XỬ LÝ HIỂN THỊ THÔNG BÁO TỪNG TRƯỜNG HỢP
                 if (statusSelected === "Tiếc quá, mình không đến được") {
                     
-                    // CHUỖI THÔNG BÁO DÀNH RIÊNG CHO TRƯỜNG HỢP KHÔNG ĐẾN ĐƯỢC
-                    Swal.fire({
+                    // Bước 1: Hiện Mèo khóc, đợi người dùng chủ động bấm OK
+                    const firstResult = await Swal.fire({
                         title: 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.',
                         text: 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂',
                         imageUrl: 'mèo khóc.jpg',
@@ -226,42 +225,38 @@
                         imageAlt: 'Mèo khóc',
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#1e3a8a'
-                    }).then((result) => {
-                        // Khi người dùng bấm OK ở thông báo mèo khóc
-                        if (result.isConfirmed) {
-                            
-                            // 1. Hiện thông báo "mèo lườm.jpg" trong 3 giây rồi tự biến mất
-                            Swal.fire({
-                                title: 'Ủa alo? 👀',
-                                text: 'Tính bùng kèo thiệt hả, xem lại lịch coi có nhầm lẫn gì không đi nha!',
-                                imageUrl: 'mèo lườm.jpg',
-                                imageWidth: 250,
-                                imageHeight: 250,
-                                imageAlt: 'Mèo lườm',
-                                timer: 10000,
-                                timerProgressBar: true,
-                                showConfirmButton: false
-                            }).then(() => {
-                                
-                                // 2. Sau 3 giây, tự động chuyển sang thông báo "mèo chụp.jpg" trong 3 giây tiếp theo
-                                Swal.fire({
-                                    title: 'Chốt lịch nha! 📸',
-                                    text: 'Đã chụp màn hình bằng chứng "vắng mặt" gửi cho hội bạn rồi nhé, không chạy đi đâu được!',
-                                    imageUrl: 'mèo chụp.png',
-                                    imageWidth: 250,
-                                    imageHeight: 250,
-                                    imageAlt: 'Mèo chụp',
-                                    timer: 10000,
-                                    timerProgressBar: true,
-                                    showConfirmButton: false
-                                });
-                                
-                            });
-                        }
                     });
 
+                    if (firstResult.isConfirmed) {
+                        // Bước 2: Đợi chạy xong 3 giây của Mèo lườm
+                        await Swal.fire({
+                            title: 'Ủa alo? 👀',
+                            text: 'Tính bùng kèo thiệt hả, xem lại lịch coi có nhầm lẫn gì không đi nha!',
+                            imageUrl: 'mèo lườm.jpg',
+                            imageWidth: 250,
+                            imageHeight: 250,
+                            imageAlt: 'Mèo lườm',
+                            timer: 3000, // Đã đổi thành 3000ms (3 giây) cho hợp lý thay vì 10s quá dài
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+
+                        // Bước 3: Sau khi Mèo lườm đóng lại, Mèo chụp mới kích hoạt
+                        Swal.fire({
+                            title: 'Chốt lịch nha! 📸',
+                            text: 'Đã chụp màn hình bằng chứng "vắng mặt" gửi cho hội bạn rồi nhé, không chạy đi đâu được!',
+                            imageUrl: 'mèo chụp.png',
+                            imageWidth: 250,
+                            imageHeight: 250,
+                            imageAlt: 'Mèo chụp',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+                    }
+
                 } else {
-                    // CÁC TRƯỜNG HỢP CÒN LẠI (Chỉ hiện đúng 1 thông báo thông thường, nhấn OK là đóng)
+                    // CÁC TRƯỜNG HỢP ĐẾN HOẶC XEM LẠI LỊCH
                     let alertTitle = 'Cảm ơn tềnh iu!';
                     let alertText = 'Phản hồi của bạn đã được ghim dô danh sách cụa toi.';
                     let alertImage = '';
@@ -288,11 +283,11 @@
                     });
                 }
 
+                // Reset form sau khi hoàn tất thành công
                 form.reset();
-                // Khôi phục lại chiều cao ban đầu của ô textarea sau khi reset dữ liệu
                 document.getElementById('formMessage').style.height = '';
-            })
-            .catch(error => {
+
+            } catch (error) {
                 console.error('Lỗi!', error.message);
                 Swal.fire({
                     icon: 'error',
@@ -301,11 +296,10 @@
                     confirmButtonText: 'Thử lại',
                     confirmButtonColor: '#1e3a8a'
                 });
-            })
-            .finally(() => {
+            } finally {
                 submitBtn.disabled = false;
                 btnText.innerText = "Gửi Xác Nhận";
-            });
+            }
         });
     </script>
 </body>
