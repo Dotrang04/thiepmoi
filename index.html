@@ -24,10 +24,11 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
+    <!-- PHẦN 1: BANNER ĐẦU TRANG (GIỮ NGUYÊN ẢNH NỀN NEW A1) -->
     <section class="min-h-screen relative flex items-end justify-center text-center text-white px-4 pb-16 overflow-hidden">
         
         <div class="absolute inset-0 z-0">
-            <img src="a1.JPG" alt="Background" class="w-full h-full object-cover">
+            <img src="a1.jpg" alt="Background" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]"></div>
         </div>
 
@@ -76,17 +77,16 @@
         </div>
     </section>
 
-    <section class="relative py-24 px-4 overflow-hidden bg-cover bg-center" style="background-image: url('DSC00099.JPG');">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-[1px] z-0"></div>
-
+    <!-- PHẦN 2: THÔNG TIN BUỔI LỄ (ĐÃ ĐỔI SANG NỀN TRƠN TỐI GIẢN) -->
+    <section class="relative py-24 px-4 overflow-hidden bg-slate-100">
         <div class="relative z-10 max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h3 class="font-bold text-3xl text-white mb-3 leading-tight uppercase tracking-wide">Thông Tin Buổi Lễ</h3>
+                <h3 class="font-bold text-3xl text-blue-950 mb-3 leading-tight uppercase tracking-wide">Thông Tin Buổi Lễ</h3>
                 <div class="w-20 h-1 bg-amber-400 mx-auto rounded"></div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 items-stretch">
-                <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/10 text-center flex flex-col justify-center transform transition hover:shadow-2xl">
+                <div class="bg-white p-8 rounded-3xl shadow-md border border-slate-200/60 text-center flex flex-col justify-center transform transition hover:shadow-xl">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
@@ -96,7 +96,7 @@
                     <p class="text-slate-600">Hãy đến sớm để cùng nhau nháy 2 cái ảnh capcut giựt giựt nhé!🤣 </p>
                 </div>
 
-                <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/10 text-center flex flex-col justify-between transform transition hover:shadow-2xl">
+                <div class="bg-white p-8 rounded-3xl shadow-md border border-slate-200/60 text-center flex flex-col justify-between transform transition hover:shadow-xl">
                     <div>
                         <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -114,10 +114,9 @@
         </div>
     </section>
 
-    <section class="relative py-24 px-4 bg-cover bg-center overflow-hidden" style="background-image: url('DSC01027.JPG');">
-        <div class="absolute inset-0 bg-black/55 backdrop-blur-[1.5px] z-0"></div>
-
-        <div class="relative z-10 max-w-xl mx-auto bg-white p-10 sm:p-12 rounded-3xl shadow-2xl">
+    <!-- PHẦN 3: XÁC NHẬN THAM DỰ (ĐÃ ĐỔI SANG NỀN TRƠN TỐI GIẢN) -->
+    <section class="relative py-24 px-4 overflow-hidden bg-slate-50">
+        <div class="relative z-10 max-w-xl mx-auto bg-white p-10 sm:p-12 rounded-3xl shadow-xl border border-slate-100">
             <h3 class="font-bold text-3xl text-center text-blue-950 mb-3 leading-tight uppercase tracking-wide">Xác Nhận Tham Dự</h3>
             <p class="text-center text-slate-600 text-sm mb-10">Phản hồi của bạn giúp Doanh chuẩn bị đón tiếp chu đáo hơn nhé!</p>
             
@@ -148,12 +147,14 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="bg-blue-950 text-slate-400 text-center py-8 text-sm">
         <p>Rất mong được gặp tềnh iu !!!</p>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // 1. ĐÃ SỬA: Đồng bộ ngày đếm ngược chính xác với nội dung (24/07/2026)
+        // 1. Cấu hình đếm ngược đến ngày lễ chính xác
         const graduationDate = new Date("2026-07-24T08:30:00").getTime();
 
         const countdown = setInterval(function() {
@@ -179,7 +180,7 @@
             }
         }, 1000);
 
-        // 2. ĐÃ SỬA: Xử lý chuỗi thông báo không bị ghi đè chéo nhau bằng Async/Await
+        // 2. Xử lý sự kiện gửi Form bằng Async/Await chuỗi Meme không bị đè nhau
         document.getElementById('attendanceForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -212,10 +213,8 @@
                     body: urlEncodedData
                 });
 
-                // XỬ LÝ HIỂN THỊ THÔNG BÁO TỪNG TRƯỜNG HỢP
                 if (statusSelected === "Tiếc quá, mình không đến được") {
                     
-                    // Bước 1: Hiện Mèo khóc, đợi người dùng chủ động bấm OK
                     const firstResult = await Swal.fire({
                         title: 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.',
                         text: 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂',
@@ -228,7 +227,6 @@
                     });
 
                     if (firstResult.isConfirmed) {
-                        // Bước 2: Đợi chạy xong 3 giây của Mèo lườm
                         await Swal.fire({
                             title: 'Ủa alo? 👀',
                             text: 'Tính bùng kèo thiệt hả, xem lại lịch coi có nhầm lẫn gì không đi nha!',
@@ -236,12 +234,11 @@
                             imageWidth: 250,
                             imageHeight: 250,
                             imageAlt: 'Mèo lườm',
-                            timer: 3000, // Đã đổi thành 3000ms (3 giây) cho hợp lý thay vì 10s quá dài
+                            timer: 3000,
                             timerProgressBar: true,
                             showConfirmButton: false
                         });
 
-                        // Bước 3: Sau khi Mèo lườm đóng lại, Mèo chụp mới kích hoạt
                         Swal.fire({
                             title: 'Chốt lịch nha! 📸',
                             text: 'Đã chụp màn hình bằng chứng "vắng mặt" gửi cho hội bạn rồi nhé, không chạy đi đâu được!',
@@ -256,7 +253,6 @@
                     }
 
                 } else {
-                    // CÁC TRƯỜNG HỢP ĐẾN HOẶC XEM LẠI LỊCH
                     let alertTitle = 'Cảm ơn tềnh iu!';
                     let alertText = 'Phản hồi của bạn đã được ghim dô danh sách cụa toi.';
                     let alertImage = '';
@@ -283,7 +279,6 @@
                     });
                 }
 
-                // Reset form sau khi hoàn tất thành công
                 form.reset();
                 document.getElementById('formMessage').style.height = '';
 
