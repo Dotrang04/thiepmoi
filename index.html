@@ -9,31 +9,21 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { font-family: 'Montserrat', sans-serif; }
-        
-        /* Phông chữ có chân kiểu tạp chí sang trọng, gọn gàng, ít uốn lượn */
-        .font-title-modern { 
-            font-family: 'Playfair Display', serif; 
-        }
-        
-        /* Phông chữ mềm mại cho phần tên riêng */
-        .font-name-wedding { 
-            font-family: 'Alex Brush', cursive; 
-            font-weight: 400;
-        }
+        .font-title-modern { font-family: 'Playfair Display', serif; }
+        .font-name-wedding { font-family: 'Alex Brush', cursive; font-weight: 400; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- PHẦN 1: BANNER ĐẦU TRANG (GIỮ NGUYÊN ẢNH NỀN NEW A1) -->
+    <!-- PHẦN 1: BANNER ĐẦU TRANG -->
     <section class="min-h-screen relative flex items-end justify-center text-center text-white px-4 pb-16 overflow-hidden">
-        
-        <div class="absolute inset-0 z-0">
-            <img src="a1.jpg" alt="Background" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]"></div>
+        <div class="absolute inset-0 z-0 bg-slate-800">
+            <!-- Bạn nhớ kiểm tra kỹ đuôi file ảnh trên GitHub xem viết hoa hay viết thường nhé -->
+            <img src="a1.jpg" alt="Background" class="w-full h-full object-cover opacity-80">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-[0.5px]"></div>
         </div>
 
         <div class="z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center space-y-6">
-            
             <div class="mb-2 w-full overflow-hidden">
                 <p class="text-amber-400 font-semibold tracking-widest uppercase mb-2 text-xs sm:text-sm">Save The Date</p>
                 <h1 class="font-title-modern text-3xl sm:text-4xl lg:text-5xl text-amber-200 font-medium whitespace-nowrap tracking-wide uppercase">
@@ -77,8 +67,8 @@
         </div>
     </section>
 
-    <!-- PHẦN 2: THÔNG TIN BUỔI LỄ (ĐÃ ĐỔI SANG NỀN TRƠN TỐI GIẢN) -->
-    <section class="relative py-24 px-4 overflow-hidden bg-slate-100">
+    <!-- PHẦN 2: THÔNG TIN BUỔI LỄ (ÉP NỀN TRƠN) -->
+    <section class="relative py-24 px-4 overflow-hidden bg-slate-100" style="background-image: none !important;">
         <div class="relative z-10 max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h3 class="font-bold text-3xl text-blue-950 mb-3 leading-tight uppercase tracking-wide">Thông Tin Buổi Lễ</h3>
@@ -114,8 +104,8 @@
         </div>
     </section>
 
-    <!-- PHẦN 3: XÁC NHẬN THAM DỰ (ĐÃ ĐỔI SANG NỀN TRƠN TỐI GIẢN) -->
-    <section class="relative py-24 px-4 overflow-hidden bg-slate-50">
+    <!-- PHẦN 3: XÁC NHẬN THAM DỰ (ÉP NỀN TRƠN) -->
+    <section class="relative py-24 px-4 overflow-hidden bg-slate-50" style="background-image: none !important;">
         <div class="relative z-10 max-w-xl mx-auto bg-white p-10 sm:p-12 rounded-3xl shadow-xl border border-slate-100">
             <h3 class="font-bold text-3xl text-center text-blue-950 mb-3 leading-tight uppercase tracking-wide">Xác Nhận Tham Dự</h3>
             <p class="text-center text-slate-600 text-sm mb-10">Phản hồi của bạn giúp Doanh chuẩn bị đón tiếp chu đáo hơn nhé!</p>
@@ -154,7 +144,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // 1. Cấu hình đếm ngược đến ngày lễ chính xác
         const graduationDate = new Date("2026-07-24T08:30:00").getTime();
 
         const countdown = setInterval(function() {
@@ -180,7 +169,6 @@
             }
         }, 1000);
 
-        // 2. Xử lý sự kiện gửi Form bằng Async/Await chuỗi Meme không bị đè nhau
         document.getElementById('attendanceForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -214,7 +202,6 @@
                 });
 
                 if (statusSelected === "Tiếc quá, mình không đến được") {
-                    
                     const firstResult = await Swal.fire({
                         title: 'Đứng hình mất 5 giây, suy sụp mất 5 ngày.',
                         text: 'Sự vắng mặt của bạn là một tổn thất lớn cho hàng ghế khán giả. Để bù đắp cho tổn thất tinh thần này, tôi chấp nhận chuyển khoản hoặc một chầu lẩu ún nc ngọt nhoé.😂',
@@ -251,7 +238,6 @@
                             showConfirmButton: false
                         });
                     }
-
                 } else {
                     let alertTitle = 'Cảm ơn tềnh iu!';
                     let alertText = 'Phản hồi của bạn đã được ghim dô danh sách cụa toi.';
@@ -281,7 +267,6 @@
 
                 form.reset();
                 document.getElementById('formMessage').style.height = '';
-
             } catch (error) {
                 console.error('Lỗi!', error.message);
                 Swal.fire({
